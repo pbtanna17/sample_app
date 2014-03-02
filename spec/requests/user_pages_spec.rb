@@ -37,8 +37,7 @@ describe "User pages" do
       	it { should have_content('errors') }
       	it { should have_content('Name can\'t be blank') }
       	it { should have_content('Email can\'t be blank') }
-      	#it { should have_content('Password confirmation doesn\'t match Password') }
-      	#it { should have_content('Password confirmation can\'t be blank') }
+        it { should have_content('Email is invalid') }
       	it { should have_content('Password can\'t be blank') }
       	it { should have_content('Password is too short (minimum is 6 characters)') }
       end
@@ -60,7 +59,8 @@ describe "User pages" do
       	before { click_button submit }
       	let (:user) { User.find_by(email: 'user@example.com') }
 
-      	it { should have_title(user.name) }
+      	it { should have_link('Sign out') }
+        it { should have_title(user.name) }
       	it { should have_selector('div.alert.alert-success') }
       end
     end
